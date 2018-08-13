@@ -1,0 +1,29 @@
+﻿@page "/video"
+@page "/video/{videoId}"
+
+@if (!String.IsNullOrEmpty(videoId))
+{
+
+    <div>
+        this is video with id: @videoId
+    </div>
+
+}
+else
+{
+    <div>
+        Invalid video identifier
+    </div>
+
+}
+
+@functions {
+[Parameter]
+private string videoId { get; set; }
+
+protected override void OnInit()
+{
+    Console.WriteLine($"Video ID: {videoId}");
+
+}
+}

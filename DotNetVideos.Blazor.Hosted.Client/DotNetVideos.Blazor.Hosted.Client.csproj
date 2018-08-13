@@ -14,5 +14,22 @@
   <ItemGroup>
     <ProjectReference Include="..\DotNetVideos.Blazor.Hosted.Shared\DotNetVideos.Blazor.Hosted.Shared.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- extends watching group to include *.js files -->
+    <Watch Include="**\*.cshtml" Exclude="node_modules\**\*;**\*.js.map;obj\**\*;bin\**\*" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Pages\Videos\Video.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Watch Remove="Pages\Videos\Video.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Videos\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Pages\Video.cshtml" />
+  </ItemGroup>
 
 </Project>

@@ -1,0 +1,38 @@
+﻿@page "/videos"
+@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
+
+@foreach(var video in Videos)
+{
+
+    <div class="col-md-8 col-sm-6">
+        <h3>Video collection classics</h3>
+        <p><strong>Original Title: </strong> @video</p>
+
+       
+        <p>
+            <a href=@($"/video/{video}") class="btn btn-default" role="button">Play</a>
+            <a href=@($"/video/edit/{video}") class="btn btn-default" role="button">Edit</a>
+        </p>
+    </div>
+
+    <div class="row">
+        <a href=@($"/video/add/") class="btn btn-default" role="button">
+            Add
+        </a>
+    </div>
+}
+
+
+@functions {
+    [Parameter]
+    protected IEnumerable<string> Videos { get; set; } = new string[] { "Video 1", "v2", "vid3" };
+    protected void Navigate(string href)
+    {
+        UriHelper.NavigateTo(href);
+    }
+
+    protected override void OnInit()
+    {
+        Console.WriteLine($"Here are some videos, first on the list: {(Videos.FirstOrDefault() ?? "No videos")}");
+    }
+}
