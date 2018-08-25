@@ -1,38 +1,52 @@
 ﻿@page "/videos"
-@inject Microsoft.AspNetCore.Blazor.Services.IUriHelper UriHelper
+@inherits VideosListPage
 
-@foreach(var video in Videos)
+@using DotNetVideos.Blazor.Hosted.Shared.Entities.Dtos
+
+@if (Videos == null)
 {
+    <p><em>Loading videos...</em></p>
 
-    <div class="col-md-8 col-sm-6">
-        <h3>Video collection classics</h3>
-        <p><strong>Original Title: </strong> @video</p>
+}
+else
+{
+    @foreach (VideoDto video in Videos)
+    {
 
-       
-        <p>
-            <a href=@($"/video/{video}") class="btn btn-default" role="button">Play</a>
-            <a href=@($"/video/edit/{video}") class="btn btn-default" role="button">Edit</a>
-        </p>
-    </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="thumbnail">
+                <img src=@video.ThumbUrl style="max-width: 100%; max-height: 100%;" />
+            </div>
+        </div>
 
-    <div class="row">
-        <a href=@($"/video/add/") class="btn btn-default" role="button">
-            Add
-        </a>
-    </div>
+        <div class="col-md-8 col-sm-6">
+            <h3>@video.Title</h3>
+            <p><strong>Original Title: </strong>@video.OriginalTitle</p>
+
+            <div>
+                <p><strong>Description: </strong>@video.Description</p>
+            </div>
+            <div>
+                <p><strong>Original Description: </strong>@video.OriginalDescription</p>
+            </div>
+
+            <p>
+                <a href=@($"/video/{video.Id}") class="btn btn-default" role="button">Play</a>
+                <a href=@($"/video/edit/{video.Id}") class="btn btn-default" role="button">Edit</a>
+            </p>
+        </div>
+
+
+        <div class="row">
+            <a href=@($"/video/add/") class="btn btn-default" role="button">
+                Add
+            </a>
+        </div>
+    }
 }
 
 
 @functions {
-    [Parameter]
-    protected IEnumerable<string> Videos { get; set; } = new string[] { "Video 1", "v2", "vid3" };
-    protected void Navigate(string href)
-    {
-        UriHelper.NavigateTo(href);
-    }
 
-    protected override void OnInit()
-    {
-        Console.WriteLine($"Here are some videos, first on the list: {(Videos.FirstOrDefault() ?? "No videos")}");
-    }
+
 }

@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Blazor.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
+
 namespace DotNetVideos.Blazor.Hosted.Client
 {
     public class Startup
